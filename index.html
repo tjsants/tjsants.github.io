@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Tools Brasil - Juntar PDF Online</title>
+
+<meta name="description" content="Junte arquivos PDF online grátis, rápido e seguro.">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0f172a;
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:50px 20px;
+}
+
+header h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+header p{
+    color:#94a3b8;
+    font-size:18px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:25px;
+    padding:40px;
+    margin-top:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.upload-area{
+    border:2px dashed #475569;
+    border-radius:20px;
+    padding:60px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.upload-area:hover{
+    border-color:#3b82f6;
+    background:#172033;
+}
+
+.upload-area h2{
+    margin-top:20px;
+    font-size:30px;
+}
+
+.upload-area p{
+    color:#94a3b8;
+    margin-top:10px;
+}
+
+input[type=file]{
+    display:none;
+}
+
+.file-list{
+    margin-top:30px;
+}
+
+.file-item{
+    background:#0f172a;
+    border:1px solid #334155;
+    border-radius:15px;
+    padding:18px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.btn{
+    background:#3b82f6;
+    border:none;
+    color:white;
+    padding:14px 25px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#2563eb;
+    transform:translateY(-2px);
+}
+
+.actions{
+    text-align:center;
+    margin-top:30px;
+}
+
+.ad-box{
+    background:#111827;
+    border:1px dashed #374151;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    color:#94a3b8;
+    margin-top:35px;
+    font-size:18px;
+}
+
+.content{
+    margin-top:60px;
+}
+
+.content h2{
+    margin-top:40px;
+    margin-bottom:15px;
+}
+
+.content p{
+    color:#cbd5e1;
+    line-height:1.9;
+}
+
+.related-tools{
+    margin-top:70px;
+}
+
+.related-tools h2{
+    margin-bottom:25px;
+}
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.tool-card{
+    background:#1e293b;
+    border:1px solid #334155;
+    border-radius:18px;
+    padding:25px;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.tool-card:hover{
+    transform:translateY(-5px);
+    border-color:#3b82f6;
+    background:#172033;
+}
+
+.tool-card h3{
+    margin-bottom:10px;
+}
+
+.tool-card p{
+    color:#94a3b8;
+    line-height:1.6;
+}
+
+footer{
+    margin-top:80px;
+    padding:40px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+@media(max-width:768px){
+
+    header h1{
+        font-size:34px;
+    }
+
+    .card{
+        padding:25px;
+    }
+
+    .upload-area{
+        padding:40px 15px;
+    }
+
+    .file-item{
+        flex-direction:column;
+        gap:15px;
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Juntar PDF Online</h1>
+
+    <p>
+        Una vários arquivos PDF gratuitamente e sem upload para servidor.
+    </p>
+
+</header>
+
+<div class="container">
+
+    <!-- ANUNCIO 1 -->
+    <div class="ad-box">
+        ESPAÇO PARA ANÚNCIO GOOGLE ADSENSE
+    </div>
+
+    <div class="card">
+
+        <label class="upload-area" for="pdfInput">
+
+            <svg width="80" height="80" fill="#3b82f6" viewBox="0 0 24 24">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7z"/>
+                <path d="M5 18v2h14v-2z"/>
+            </svg>
+
+            <h2>Selecionar PDFs</h2>
+
+            <p>
+                Clique aqui para escolher os arquivos PDF
+            </p>
+
+        </label>
+
+        <input type="file" id="pdfInput" multiple accept=".pdf">
+
+        <div class="file-list" id="fileList"></div>
+
+        <div class="actions">
+
+            <button class="btn" onclick="mergePDFs()">
+                Juntar PDFs
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ANUNCIO 2 -->
+    <div class="ad-box">
+        SEGUNDO ESPAÇO PARA ANÚNCIO
+    </div>
+
+    <div class="content">
+
+        <h2>Como juntar PDFs online?</h2>
+
+        <p>
+            Utilize nossa ferramenta para unir múltiplos arquivos PDF
+            de forma rápida, segura e totalmente online.
+        </p>
+
+        <h2>Ferramenta segura</h2>
+
+        <p>
+            Todos os arquivos permanecem no seu navegador.
+            Nenhum documento é enviado para servidores.
+        </p>
+
+        <h2>Totalmente grátis</h2>
+
+        <p>
+            Use gratuitamente sem necessidade de cadastro.
+        </p>
+
+    </div>
+
+    <!-- ANUNCIO 3 -->
+    <div class="ad-box">
+        TERCEIRO ESPAÇO PARA ANÚNCIO
+    </div>
+
+    <div class="related-tools">
+
+        <h2>Veja também</h2>
+
+        <div class="tools-grid">
+
+            <a href="#" class="tool-card">
+                <h3>Comprimir PDF</h3>
+                <p>Reduza o tamanho dos seus arquivos PDF.</p>
+            </a>
+
+            <a href="#" class="tool-card">
+                <h3>Dividir PDF</h3>
+                <p>Separe páginas do PDF rapidamente.</p>
+            </a>
+
+            <a href="#" class="tool-card">
+                <h3>Imagem para PDF</h3>
+                <p>Converta imagens JPG e PNG em PDF.</p>
+            </a>
+
+            <a href="#" class="tool-card">
+                <h3>Gerador QR Code</h3>
+                <p>Crie QR Codes online gratuitamente.</p>
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- ANUNCIO 4 -->
+    <div class="ad-box">
+        QUARTO ESPAÇO PARA ANÚNCIO
+    </div>
+
+    <!-- ANUNCIO 5 -->
+    <div class="ad-box">
+        QUINTO ESPAÇO PARA ANÚNCIO
+    </div>
+
+</div>
+
+<footer>
+    © 2026 PDF Tools Brasil
+</footer>
+
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+<script>
+
+const pdfInput = document.getElementById('pdfInput');
+const fileList = document.getElementById('fileList');
+
+let selectedFiles = [];
+
+pdfInput.addEventListener('change', (e)=>{
+
+    selectedFiles = Array.from(e.target.files);
+
+    renderFiles();
+
+});
+
+function renderFiles(){
+
+    fileList.innerHTML = '';
+
+    selectedFiles.forEach((file,index)=>{
+
+        const div = document.createElement('div');
+
+        div.className = 'file-item';
+
+        div.innerHTML = `
+            <span>${file.name}</span>
+
+            <button class="btn" onclick="removeFile(${index})">
+                Remover
+            </button>
+        `;
+
+        fileList.appendChild(div);
+
+    });
+
+}
+
+function removeFile(index){
+
+    selectedFiles.splice(index,1);
+
+    renderFiles();
+
+}
+
+async function mergePDFs(){
+
+    if(selectedFiles.length < 2){
+
+        alert('Selecione pelo menos 2 PDFs.');
+
+        return;
+    }
+
+    const mergedPdf = await PDFLib.PDFDocument.create();
+
+    for(const file of selectedFiles){
+
+        const bytes = await file.arrayBuffer();
+
+        const pdf = await PDFLib.PDFDocument.load(bytes);
+
+        const copiedPages = await mergedPdf.copyPages(
+            pdf,
+            pdf.getPageIndices()
+        );
+
+        copiedPages.forEach((page)=>{
+
+            mergedPdf.addPage(page);
+
+        });
+
+    }
+
+    const mergedPdfFile = await mergedPdf.save();
+
+    const blob = new Blob(
+        [mergedPdfFile],
+        { type:'application/pdf' }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+
+    a.href = url;
+
+    a.download = 'pdf-unido.pdf';
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+</script>
+
+</body>
+</html>
+
