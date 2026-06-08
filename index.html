@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5932203345016255"
-     crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
 
 <style>
 
@@ -32,7 +33,7 @@ body{
 
 header{
     text-align:center;
-    padding:60px 20px;
+    padding:50px 20px;
 }
 
 header h1{
@@ -56,7 +57,7 @@ header p{
     border-radius:25px;
     padding:40px;
     margin-top:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
 .upload-area{
@@ -126,13 +127,13 @@ input[type=file]{
 
 .ad-box{
     background:#111827;
-    border:1px solid #374151;
+    border:1px dashed #374151;
     border-radius:20px;
-    padding:35px;
+    padding:40px;
     text-align:center;
     color:#94a3b8;
     margin-top:35px;
-    min-height:120px;
+    font-size:18px;
 }
 
 .content{
@@ -246,7 +247,7 @@ footer a:hover{
 <div class="container">
 
     <div class="ad-box">
-        Espaço para anúncio Google Adsense
+        ESPAÇO PARA ANÚNCIO GOOGLE ADSENSE
     </div>
 
     <div class="card">
@@ -281,7 +282,51 @@ footer a:hover{
     </div>
 
     <div class="ad-box">
-        Segundo espaço para anúncio
+        SEGUNDO ESPAÇO PARA ANÚNCIO
+    </div>
+
+    <div class="card">
+
+        <h2 style="margin-bottom:25px;">
+            Converter Arquivos para PDF
+        </h2>
+
+        <label class="upload-area" for="convertInput">
+
+            <svg width="80" height="80" fill="#22c55e" viewBox="0 0 24 24">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7z"/>
+                <path d="M5 18v2h14v-2z"/>
+            </svg>
+
+            <h2>Selecionar Arquivos</h2>
+
+            <p>
+                JPG, PNG e TXT para PDF
+            </p>
+
+        </label>
+
+        <input
+            type="file"
+            id="convertInput"
+            multiple
+            accept=".jpg,.jpeg,.png,.txt"
+        >
+
+        <div class="file-list" id="convertList"></div>
+
+        <div class="actions">
+
+            <button class="btn" onclick="convertToPDF()">
+                Converter para PDF
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="ad-box">
+        TERCEIRO ESPAÇO PARA ANÚNCIO
     </div>
 
     <div class="content">
@@ -306,10 +351,6 @@ footer a:hover{
             Use gratuitamente sem necessidade de cadastro.
         </p>
 
-    </div>
-
-    <div class="ad-box">
-        Terceiro espaço para anúncio
     </div>
 
     <div class="related-tools">
@@ -343,25 +384,21 @@ footer a:hover{
     </div>
 
     <div class="ad-box">
-        Quarto espaço para anúncio
+        QUARTO ESPAÇO PARA ANÚNCIO
     </div>
 
     <div class="ad-box">
-        Quinto espaço para anúncio
+        QUINTO ESPAÇO PARA ANÚNCIO
     </div>
 
 </div>
 
 <footer>
-
     © 2026 PDF Tools Brasil
-
     <br><br>
-
     <a href="#">Política de Privacidade</a>
     <a href="#">Termos de Uso</a>
     <a href="#">Contato</a>
-
 </footer>
 
 <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
@@ -464,8 +501,134 @@ async function mergePDFs(){
 
 }
 
+const convertInput = document.getElementById('convertInput');
+const convertList = document.getElementById('convertList');
+
+let convertFiles = [];
+
+convertInput.addEventListener('change',(e)=>{
+
+    convertFiles = Array.from(e.target.files);
+
+    renderConvertFiles();
+
+});
+
+function renderConvertFiles(){
+
+    convertList.innerHTML = '';
+
+    convertFiles.forEach((file,index)=>{
+
+        const div = document.createElement('div');
+
+        div.className = 'file-item';
+
+        div.innerHTML = `
+            <span>${file.name}</span>
+
+            <button class="btn" onclick="removeConvertFile(${index})">
+                Remover
+            </button>
+        `;
+
+        convertList.appendChild(div);
+
+    });
+
+}
+
+function removeConvertFile(index){
+
+    convertFiles.splice(index,1);
+
+    renderConvertFiles();
+
+}
+
+async function convertToPDF(){
+
+    if(convertFiles.length === 0){
+
+        alert('Selecione arquivos.');
+
+        return;
+    }
+
+    const pdfDoc = await PDFLib.PDFDocument.create();
+
+    for(const file of convertFiles){
+
+        if(file.type.includes('image')){
+
+            const bytes = await file.arrayBuffer();
+
+            let image;
+
+            if(file.type.includes('png')){
+
+                image = await pdfDoc.embedPng(bytes);
+
+            }else{
+
+                image = await pdfDoc.embedJpg(bytes);
+
+            }
+
+            const page = pdfDoc.addPage([
+                image.width,
+                image.height
+            ]);
+
+            page.drawImage(image,{
+                x:0,
+                y:0,
+                width:image.width,
+                height:image.height
+            });
+
+        }
+
+        else if(file.type === 'text/plain'){
+
+            const text = await file.text();
+
+            const page = pdfDoc.addPage([595,842]);
+
+            page.drawText(text,{
+                x:40,
+                y:800,
+                size:12,
+                maxWidth:500
+            });
+
+        }
+
+    }
+
+    const pdfBytes = await pdfDoc.save();
+
+    const blob = new Blob(
+        [pdfBytes],
+        {type:'application/pdf'}
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+
+    a.href = url;
+
+    a.download = 'arquivo-convertido.pdf';
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
 </script>
 
 </body>
 </html>
-
+```
